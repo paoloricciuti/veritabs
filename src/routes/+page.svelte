@@ -98,7 +98,9 @@
             <code class="select-all">{formula}</code>
         </section>
     </section>
-    <section class="flex gap-2 items-center justify-center mb-4 py-1">
+    <section
+        class="flex flex-wrap max-w-full gap-2 items-center justify-center mb-4 py-1"
+    >
         {#each [...variables] as variableName (variableName)}
             <VariablePill
                 name={variableName}
