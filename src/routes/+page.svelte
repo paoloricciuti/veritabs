@@ -6,11 +6,11 @@
     import copy from "../assets/copy.svg";
     import solve from "../assets/solve.svg";
 
-    let variables = new Set<string>(["a", "b"]);
+    let variables = new Set<string>();
     let variable = "";
     let table: string[] = [];
     let selectedIndexes = new Set<number>();
-    let formula: string = "no formula yet";
+    let formula: string;
 
     $: {
         let length = 2 ** variables.size - 1;
