@@ -17,7 +17,7 @@
         </svg>
         <span>
             built with love by
-            <a target="_blank" href="https://github.com/paoloricciuti/hexwords"
+            <a target="_blank" href="https://github.com/paoloricciuti/veritabs"
                 >paoloricciuti
             </a>
         </span>
