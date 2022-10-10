@@ -16,7 +16,7 @@
             />
         </svg>
         <span>
-            Built with love by
+            built with love by
             <a target="_blank" href="https://github.com/paoloricciuti/hexwords"
                 >paoloricciuti
             </a>
@@ -31,7 +31,7 @@
             </g>
         </svg>
         <span>
-            Follow me on twitter
+            follow me on twitter
             <a target="_blank" href="https://twitter.com/PaoloRicciuti"
                 >@paoloricciuti
             </a>

@@ -8,10 +8,15 @@
     import { onMount } from "svelte";
     import Credits from "../components/Credits.svelte";
 
-    let variables = new Set<string>();
+    let variables = new Set<string>([
+        "isArchived",
+        "isAdmin",
+        "includeST",
+        "hasStripe",
+    ]);
     let variable = "";
     let table: string[] = [];
-    let selectedIndexes = new Set<number>();
+    let selectedIndexes = new Set<number>([]);
     let ignoredIndexes = new Set<number>();
     let formula: string;
 
@@ -31,6 +36,7 @@
                     return;
                 }
                 if (type === "result") {
+                    success("expression solved");
                     if (result === "0") {
                         formula = "false";
                         return;
@@ -65,7 +71,6 @@
 
     const handleSolve = () => {
         if (worker) {
-            console.log("posting", variables, selectedIndexes, ignoredIndexes);
             worker.postMessage({
                 variables: [...variables],
                 toPush: [...selectedIndexes],
@@ -104,7 +109,7 @@
                 <VeriTabs />
             </h1>
             <h2>
-                Sometimes writing boolean expressions with a lot of variables
+                sometimes writing boolean expressions with a lot of variables
                 can be a pain, <VeriTabs /> comes to the resque!
             </h2>
             <Credits />
@@ -117,6 +122,7 @@
             >
                 <label for="varname">variable name:</label>
                 <input
+                    autocomplete="off"
                     id="varname"
                     class="bg-zinc-600 px-2 py-1 rounded-full"
                     bind:value={variable}
@@ -128,6 +134,13 @@
                     Add
                 </button>
             </form>
+            <small class="text-xs leading-loose">
+                Add your variables, check all the cases you want true for, if
+                needed you can ignore some cases. This will give you the
+                extended expression. Click on
+                <img class="inline" src={solve} alt="solve icon" /> to get the simplified
+                version. Here's an example.
+            </small>
         </section>
         <section
             class="flex flex-wrap max-w-full gap-2 items-center justify-center empty:my-0 my-4 py-1"
@@ -243,7 +256,7 @@
                 </table>
             </section>
         {:else}
-            <p>Add a variable to see the truth table.</p>
+            <p>add a variable to see the truth table.</p>
         {/if}
     </section>
 </main>
