@@ -16,7 +16,7 @@
             />
         </svg>
         <span>
-            built with love by
+            built with ❤ by
             <a target="_blank" href="https://github.com/paoloricciuti/veritabs"
                 >paoloricciuti
             </a>
@@ -31,7 +31,7 @@
             </g>
         </svg>
         <span>
-            follow me on twitter
+            on twitter
             <a target="_blank" href="https://twitter.com/PaoloRicciuti"
                 >@paoloricciuti
             </a>

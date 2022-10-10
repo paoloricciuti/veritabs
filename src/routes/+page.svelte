@@ -1,12 +1,12 @@
 <script lang="ts">
-    import VeriTabs from "../components/VeriTabs.svelte";
-    import VariablePill from "../components/VariablePill.svelte";
     import { SvelteToast } from "@zerodevx/svelte-toast";
-    import { success, error, info } from "../toasts/toasts";
-    import copy from "../assets/copy.svg";
-    import solve from "../assets/solve.svg";
     import { onMount } from "svelte";
+    import copy from "../assets/copy.svg";
+    import Button from "../components/Button.svelte";
     import Credits from "../components/Credits.svelte";
+    import VariablePill from "../components/VariablePill.svelte";
+    import VeriTabs from "../components/VeriTabs.svelte";
+    import { error, info, success } from "../toasts/toasts";
 
     let variables = new Set<string>([
         "isArchived",
@@ -16,11 +16,13 @@
     ]);
     let variable = "";
     let table: string[] = [];
-    let selectedIndexes = new Set<number>([]);
+    let selectedIndexes = new Set<number>([6, 7, 11, 14, 15]);
     let ignoredIndexes = new Set<number>();
-    let formula: string;
+    const DEFAULT_FORMULA = "no formula yet";
+    let formula: string = DEFAULT_FORMULA;
 
     let worker: Worker;
+    let timeoutId: NodeJS.Timeout;
 
     onMount(() => {
         if (window.Worker) {
@@ -36,7 +38,7 @@
                     return;
                 }
                 if (type === "result") {
-                    success("expression solved");
+                    clearTimeout(timeoutId);
                     if (result === "0") {
                         formula = "false";
                         return;
@@ -66,34 +68,24 @@
         table = Array.from({ length: length + 1 }, (_, i) => {
             return i.toString(2).padStart(maxLength, "0");
         });
-        calculateFormula();
+        if (worker) {
+            calculateFormula();
+        }
     }
 
-    const handleSolve = () => {
+    const calculateFormula = () => {
         if (worker) {
+            timeoutId = setTimeout(() => {
+                formula = "loading...";
+            }, 500);
             worker.postMessage({
                 variables: [...variables],
                 toPush: [...selectedIndexes],
                 toPushDc: [...ignoredIndexes],
             });
+        } else {
+            formula = DEFAULT_FORMULA;
         }
-    };
-
-    const DEFAULT_FORMULA = "no formula yet";
-
-    const calculateFormula = () => {
-        formula =
-            [...selectedIndexes]
-                .map((index) => {
-                    return [...(table[index] ?? [])]
-                        .map((variableValue, variableIndex) => {
-                            return `${variableValue === "1" ? "" : "!"}${
-                                [...variables][variableIndex]
-                            }`;
-                        })
-                        .join(" && ");
-                })
-                .join(" || ") || DEFAULT_FORMULA;
     };
 </script>
 
@@ -127,19 +119,15 @@
                     class="bg-zinc-600 px-2 py-1 rounded-full"
                     bind:value={variable}
                 />
-                <button
-                    disabled={!variable}
-                    class="bg-zinc-900 rounded-full px-4 py-1 disabled:opacity-50"
-                >
-                    Add
-                </button>
+                <Button disabled={!variable}>Add</Button>
             </form>
             <small class="text-xs leading-loose">
-                Add your variables, check all the cases you want true for, if
-                needed you can ignore some cases. This will give you the
-                extended expression. Click on
-                <img class="inline" src={solve} alt="solve icon" /> to get the simplified
-                version. Here's an example.
+                add your variables, check all the cases you want true for, if
+                needed you can ignore some cases. that's it!
+            </small>
+            <small class="text-xs leading-loose">
+                in this example i want all the admin included in the search term
+                and all the archived non-admin with stripe. easy right? 🤨
             </small>
         </section>
         <section
@@ -165,13 +153,6 @@
             <div class="flex flex-row justify-end">
                 <p class="text-sm mr-auto">formula</p>
                 <button
-                    class="disabled:opacity-50"
-                    disabled={variables.size === 0 || !worker}
-                    on:click={handleSolve}
-                >
-                    <img src={solve} alt="simplify this expression" />
-                </button>
-                <button
                     on:click={async () => {
                         if (formula === DEFAULT_FORMULA) {
                             info("there's no formula to be seen.");
@@ -192,6 +173,16 @@
         </section>
         {#if table.length > 1}
             <section class="overflow-x-auto">
+                <Button
+                    on:click={() => {
+                        selectedIndexes.clear();
+                        selectedIndexes = selectedIndexes;
+                        ignoredIndexes.clear();
+                        ignoredIndexes = ignoredIndexes;
+                        calculateFormula();
+                    }}
+                    class="mb-4">reset</Button
+                >
                 <table class="table-fixed w-full">
                     <thead>
                         <tr>
