@@ -196,14 +196,16 @@
                     <thead>
                         <tr>
                             {#each [...variables] as variable (variable)}
-                                <th>{variable}</th>
+                                <th class="overflow-hidden overflow-ellipsis">
+                                    {variable}
+                                </th>
                             {/each}
-                            <th class="overflow-hidden overflow-ellipsis"
-                                >result</th
-                            >
-                            <th class="overflow-hidden overflow-ellipsis"
-                                >ignore</th
-                            >
+                            <th class="overflow-hidden overflow-ellipsis">
+                                result
+                            </th>
+                            <th class="overflow-hidden overflow-ellipsis">
+                                ignore
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
