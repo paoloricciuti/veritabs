@@ -4,11 +4,12 @@
 	"private": true,
 	"scripts": {
 		"dev": "vite dev --open",
-		"build": "vite build",
+		"build": "npm run partytown && vite build",
 		"preview": "vite preview",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
-		"lint": "eslint ."
+		"lint": "eslint .",
+        "partytown": "partytown copylib static/~partytown"
 	},
 	"devDependencies": {
 		"@fontsource/fira-mono": "^4.5.10",
@@ -30,6 +31,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@builder.io/partytown": "^0.7.1",
 		"@sveltejs/adapter-static": "^1.0.0-next.44"
 	}
 }

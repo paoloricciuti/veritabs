@@ -1,0 +1,8 @@
+<svg viewBox="0 0 370 370" xmlns="http://www.w3.org/2000/svg" xmlns:bx="https://boxy-svg.com">
+  <path d="M34 4h302c17 0 30 14 30 30v302c0 17-13 30-30 30H34c-16 0-30-13-30-30V34C4 18 18 4 34 4Z" stroke="url(#gradient-0)" stroke-miterlimit="1" stroke-width="8"/>
+  <path d="M224 50v113" id="a" fill="none" fill-opacity=".8" fill-rule="evenodd" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="miter" stroke-opacity="1" stroke-miterlimit="4" stroke-dasharray="none" stroke="#4af626"/>
+  <path d="M146 50v113m38 84v74" fill="none" fill-opacity=".8" fill-rule="evenodd" stroke-width="7.5" stroke-linecap="round" stroke="#4af626"/>
+  <path d="M106 114s7 37 79 37c73 0 79-37 79-37-7 60 3 100-79 141-73-31-76-72-79-141Z" fill-rule="evenodd" stroke-width="7.5" stroke-linejoin="round" stroke="#4af626"/>
+  <path d="M185 296a20 20 0 1 1 0-40 20 20 0 0 1 0 40Z" fill-rule="evenodd" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round" stroke="#4af626" fill="#4af626"/>
+  <path d="M108 76s7 42 77 42c71 0 77-42 77-42" fill="none" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round" stroke="#4af626"/>
+</svg>
