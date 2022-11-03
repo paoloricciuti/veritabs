@@ -9,7 +9,7 @@
     on:click={() => {
         dispatch("delete");
     }}
-    class="flex text-sm gap-3 items-center px-4 py-1 ring-1 ring-green-400 rounded-full text-green-400 font-bold"
+    class="flex text-sm gap-3 items-center px-3 py-0.5 ring-1 ring-green-400 rounded-full text-green-400 font-bold text-xs"
 >
     {name}
     <CloseIcon classes="text-green-400" />
